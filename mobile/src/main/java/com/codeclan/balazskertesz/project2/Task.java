@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
 public class Task {
 //    This class is the highest level object, used for data storage by other classes
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int taskId;
 
     @ColumnInfo(name = "name")

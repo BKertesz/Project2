@@ -32,6 +32,4 @@ public interface TaskDao {
     @Insert
     void insertAllTask(List<Task> tasks);
 
-
-
 }

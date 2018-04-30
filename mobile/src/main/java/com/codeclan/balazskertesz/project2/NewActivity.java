@@ -1,6 +1,8 @@
 package com.codeclan.balazskertesz.project2;
 
+import android.app.Activity;
 import android.arch.persistence.room.Room;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -28,7 +30,7 @@ public class NewActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-
+                    finish();
                     return true;
                 case R.id.navigation_new:
 
@@ -65,9 +67,14 @@ public class NewActivity extends AppCompatActivity {
         RadioButton priorityButton = findViewById(taskPriority.getCheckedRadioButtonId());
         String priority = priorityButton.getText().toString();
 
-        newTask = new Task(name,description,priority);
+//        newTask = new Task(name,description,priority);
 
-        db.taskDao().insertTask(newTask);
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("name",name);
+        returnIntent.putExtra("description",description);
+        returnIntent.putExtra("priority",priority);
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
 
     }
 
