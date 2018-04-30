@@ -1,5 +1,6 @@
 package com.codeclan.balazskertesz.project2;
 
+import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -17,6 +18,8 @@ public class NewActivity extends AppCompatActivity {
     private EditText taskName;
     private EditText taskDescription;
     private RadioGroup taskPriority;
+
+    private AppDatabase db;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -48,6 +51,9 @@ public class NewActivity extends AppCompatActivity {
         taskName = (EditText) findViewById(R.id.newTaskNameId);
         taskDescription = (EditText) findViewById(R.id.taskNewDescriptionId);
         taskPriority = (RadioGroup) findViewById(R.id.newTaskProrityId);
+
+        db = Room.databaseBuilder(getApplicationContext(),
+                AppDatabase.class, "task-database").build();
     }
 
     public void addNewButtonPressed(View view){
@@ -60,6 +66,8 @@ public class NewActivity extends AppCompatActivity {
         String priority = priorityButton.getText().toString();
 
         newTask = new Task(name,description,priority);
+
+        db.taskDao().insertTask(newTask);
 
     }
 
