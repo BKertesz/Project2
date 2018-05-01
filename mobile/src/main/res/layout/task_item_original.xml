@@ -10,8 +10,25 @@
     tools:layout_editor_absoluteX="8dp"
     tools:layout_editor_absoluteY="8dp">
 
+    <TextView
+        android:id="@+id/taskNameId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
 
-
+    <TextView
+        android:id="@+id/taskDescriptionID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="14sp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="43dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +49,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/taskNameId"
+                android:id="@+id/taskNameId2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
@@ -44,7 +61,7 @@
                 tools:layout_editor_absoluteX="16dp" />
 
             <TextView
-                android:id="@+id/taskDescriptionID"
+                android:id="@+id/taskDescriptionID2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -55,14 +72,14 @@
         </LinearLayout>
 
         <ImageButton
-            android:id="@+id/editButtonId"
+            android:id="@+id/imageButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_menu_edit" />
 
         <ImageButton
-            android:id="@+id/deleteButtonId"
+            android:id="@+id/imageButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

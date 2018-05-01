@@ -67,8 +67,6 @@ public class NewActivity extends AppCompatActivity {
         RadioButton priorityButton = findViewById(taskPriority.getCheckedRadioButtonId());
         String priority = priorityButton.getText().toString();
 
-//        newTask = new Task(name,description,priority);
-
         Intent returnIntent = new Intent();
         returnIntent.putExtra("name",name);
         returnIntent.putExtra("description",description);
