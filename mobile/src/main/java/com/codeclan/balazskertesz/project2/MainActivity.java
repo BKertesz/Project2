@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     static final int NEW_TASK_CODE = 1;
 
     List<Task> tasks;
+    RecyclerView recyclerView;
 
 
     private AppDatabase db;
@@ -57,15 +58,20 @@ public class MainActivity extends AppCompatActivity {
                 .fallbackToDestructiveMigration()
                 .build();
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
+        //Find the recycleView on the main page
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
 
+        //Loads all task out of the database to a list object
         tasks = db.taskDao().getAll();
 
+        //Creates a new adapter instance and passes in the tasks
         MyRecyclerAdapter adapter = new MyRecyclerAdapter(tasks);
 
+        //Activates the recycleviewer with the adapter
         recyclerView.setAdapter(adapter);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
     }
 
@@ -80,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
 
                 Task task = new Task(name,description,priority);
                 db.taskDao().insertTask(task);
+
+                tasks = db.taskDao().getAll();
+                MyRecyclerAdapter adapter = new MyRecyclerAdapter(tasks);
+                recyclerView.setAdapter(adapter);
+
             }
 
         }

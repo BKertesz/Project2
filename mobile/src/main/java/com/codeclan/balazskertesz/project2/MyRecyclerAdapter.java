@@ -28,7 +28,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<ListViewHolder> {
         View taskView = inflater.inflate(R.layout.task_item, parent, false);
 
         // Return a new holder instance
-        ListViewHolder viewHolder = new ListViewHolder(taskView);
+        ListViewHolder viewHolder = new ListViewHolder(context,taskView);
         return viewHolder;
     }
 
