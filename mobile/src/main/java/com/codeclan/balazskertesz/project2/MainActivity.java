@@ -7,12 +7,18 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     static final int NEW_TASK_CODE = 1;
+
+    List<Task> tasks;
 
 
     private AppDatabase db;
@@ -50,6 +56,17 @@ public class MainActivity extends AppCompatActivity {
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build();
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
+
+        tasks = db.taskDao().getAll();
+
+        MyRecyclerAdapter adapter = new MyRecyclerAdapter(tasks);
+
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
     }
 
     @Override
@@ -73,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         Intent getNewTask = new Intent(this,NewActivity.class);
         startActivityForResult(getNewTask,NEW_TASK_CODE);
     }
+
+
 
 
 
