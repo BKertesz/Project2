@@ -20,8 +20,7 @@
         </activity>
         <activity
             android:name=".NewActivity"
-            android:label="@string/title_activity_new"
-            android:parentActivityName=".MainActivity"/>
+            android:label="@string/title_activity_new"></activity>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />

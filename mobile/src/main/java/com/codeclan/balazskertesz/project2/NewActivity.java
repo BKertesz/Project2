@@ -26,6 +26,7 @@ public class NewActivity extends AppCompatActivity {
     private NewViewModel viewModel;
 
     private Button addTaskButton;
+    private RadioButton priorityButton;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -64,7 +65,7 @@ public class NewActivity extends AppCompatActivity {
         addTaskButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(taskName.getText() == null || taskDescription.getText() == null){
+                if(taskName.getText() == null || taskDescription.getText() == null || taskPriority.getCheckedRadioButtonId() == -1){
                     Toast.makeText(NewActivity.this,"Missing fields", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -82,15 +83,17 @@ public class NewActivity extends AppCompatActivity {
     }
 
     public void saveNewTask(View view){
-        if(taskName.getText() == null || taskDescription.getText() == null ){
+        int i = 0;
+//        priorityButton = findViewById(taskPriority.getCheckedRadioButtonId());
+        if(taskName.getText() == null || taskDescription.getText() == null || taskPriority.getCheckedRadioButtonId() == -1 ){
             Toast.makeText(NewActivity.this, "Missing fields",Toast.LENGTH_SHORT).show();
         }
         else {
-            RadioButton priority = findViewById(taskPriority.getCheckedRadioButtonId());
+            priorityButton = findViewById(taskPriority.getCheckedRadioButtonId());
             viewModel.addTask(new Task(
                     taskName.getText().toString(),
                     taskDescription.getText().toString(),
-                    priority.getText().toString()
+                    priorityButton.getText().toString()
             ));
             finish();
         }

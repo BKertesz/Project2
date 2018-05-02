@@ -65,6 +65,8 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<ListViewHolder> {
 
         viewHolder.itemView.setTag(task);
 
+
+
 //        viewHolder.deleteButton.setOnClickListener(clickListener);
 
 

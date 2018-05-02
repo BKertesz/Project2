@@ -33,4 +33,9 @@ public interface TaskDao {
     @Insert
     void insertAllTask(List<Task> tasks);
 
+    @Query("SELECT * FROM tasks WHERE priority = (:priority)")
+    LiveData<List<Task>> getPriority(String priority);
+
+
+
 }

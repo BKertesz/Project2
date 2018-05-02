@@ -22,15 +22,16 @@ public class TaskListViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Task>> getTaskList(){
+
         return taskList;
+//        return appDatabase.taskDao().getRedPriority();
     }
 
     public void deleteItem(Task task){
         appDatabase.taskDao().deleteTask(task);
     }
 
-    public void addItem(Task task){
-        appDatabase.taskDao().insertTask(task);
-    }
+
+
 
 }
