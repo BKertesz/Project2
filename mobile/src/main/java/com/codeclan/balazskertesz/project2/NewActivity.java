@@ -1,6 +1,7 @@
 package com.codeclan.balazskertesz.project2;
 
 import android.app.Activity;
+import android.arch.lifecycle.ViewModelProviders;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NewActivity extends AppCompatActivity {
 
@@ -21,7 +23,9 @@ public class NewActivity extends AppCompatActivity {
     private EditText taskDescription;
     private RadioGroup taskPriority;
 
-    private AppDatabase db;
+    private NewViewModel viewModel;
+
+    private Button addTaskButton;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -54,25 +58,42 @@ public class NewActivity extends AppCompatActivity {
         taskDescription = (EditText) findViewById(R.id.taskNewDescriptionId);
         taskPriority = (RadioGroup) findViewById(R.id.newTaskProrityId);
 
-        db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "task-database").build();
+        viewModel = ViewModelProviders.of(this).get(NewViewModel.class);
+
+        addTaskButton = (Button) findViewById(R.id.buttonAddNewId);
+        addTaskButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if(taskName.getText() == null || taskDescription.getText() == null){
+                    Toast.makeText(NewActivity.this,"Missing fields", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    RadioButton priority = findViewById(taskPriority.getCheckedRadioButtonId());
+                    viewModel.addTask(new Task(
+                            taskName.getText().toString(),
+                            taskDescription.getText().toString(),
+                            priority.getText().toString()
+                    ));
+                    finish();
+                }
+            }
+        });
+
     }
 
-    public void addNewButtonPressed(View view){
-        Task newTask;
-
-        String name = taskName.getText().toString();
-        String description = taskDescription.getText().toString();
-
-        RadioButton priorityButton = findViewById(taskPriority.getCheckedRadioButtonId());
-        String priority = priorityButton.getText().toString();
-
-        Intent returnIntent = new Intent();
-        returnIntent.putExtra("name",name);
-        returnIntent.putExtra("description",description);
-        returnIntent.putExtra("priority",priority);
-        setResult(Activity.RESULT_OK,returnIntent);
-        finish();
+    public void saveNewTask(View view){
+        if(taskName.getText() == null || taskDescription.getText() == null ){
+            Toast.makeText(NewActivity.this, "Missing fields",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            RadioButton priority = findViewById(taskPriority.getCheckedRadioButtonId());
+            viewModel.addTask(new Task(
+                    taskName.getText().toString(),
+                    taskDescription.getText().toString(),
+                    priority.getText().toString()
+            ));
+            finish();
+        }
 
     }
 

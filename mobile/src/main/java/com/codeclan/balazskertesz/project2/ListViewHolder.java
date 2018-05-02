@@ -1,5 +1,8 @@
 package com.codeclan.balazskertesz.project2;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
@@ -51,6 +54,9 @@ public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         }
         else if(view.getId() == deleteButton.getId()){
             Toast.makeText(context,"Delete Button for "+nameText.getText(),Toast.LENGTH_SHORT).show();
+            MainActivity mainActivity = (MainActivity) context;
+            Task task = mainActivity.viewModel.getTaskList().getValue().get(position);
+            mainActivity.viewModel.deleteItem(task);
         }
 
 //        if(position != RecyclerView.NO_POSITION){

@@ -1,28 +1,32 @@
 package com.codeclan.balazskertesz.project2;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-
-    static final int NEW_TASK_CODE = 1;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     List<Task> tasks;
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
+    private MyRecyclerAdapter adapter;
+    public TaskListViewModel viewModel;
 
 
-    private AppDatabase db;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -52,55 +56,46 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "task-database")
-                .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
-                .build();
 
         //Find the recycleView on the main page
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
 
-        //Loads all task out of the database to a list object
-        tasks = db.taskDao().getAll();
 
         //Creates a new adapter instance and passes in the tasks
-        MyRecyclerAdapter adapter = new MyRecyclerAdapter(tasks);
-
+        final MyRecyclerAdapter adapter = new MyRecyclerAdapter(tasks,this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //Activates the recycleviewer with the adapter
         recyclerView.setAdapter(adapter);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        viewModel = ViewModelProviders.of(this).get(TaskListViewModel.class);
 
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode,int resultCode, Intent data){
-        if(requestCode == NEW_TASK_CODE){
-
-            if(resultCode== RESULT_OK){
-                String name = data.getStringExtra("name");
-                String description = data.getStringExtra("description");
-                String priority = data.getStringExtra("priority");
-
-                Task task = new Task(name,description,priority);
-                db.taskDao().insertTask(task);
-
-                tasks = db.taskDao().getAll();
-                MyRecyclerAdapter adapter = new MyRecyclerAdapter(tasks);
-                recyclerView.setAdapter(adapter);
-
+        viewModel.getTaskList().observe(MainActivity.this, new Observer<List<Task>>() {
+            @Override
+            public void onChanged(@Nullable List<Task> tasks) {
+                adapter.addTasks(tasks);
             }
+        });
 
-        }
+
+
 
     }
+
+
 
     public void createNewTask(){
         Intent getNewTask = new Intent(this,NewActivity.class);
-        startActivityForResult(getNewTask,NEW_TASK_CODE);
+        startActivity(getNewTask);
     }
+
+    @Override
+    public void onClick(View view){
+//        Task task = (Task) view.getTag();
+//        viewModel.deleteItem(task);
+
+
+    }
+
 
 
 

@@ -14,9 +14,11 @@ import java.util.List;
 public class MyRecyclerAdapter extends RecyclerView.Adapter<ListViewHolder> {
 
     private List<Task> tasks;
+    private View.OnClickListener clickListener;
 
-    public MyRecyclerAdapter(List<Task> tasks){
+    public MyRecyclerAdapter(List<Task> tasks,View.OnClickListener clickListener){
         this.tasks = tasks;
+        this.clickListener = clickListener;
     }
 
     @Override
@@ -61,6 +63,12 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<ListViewHolder> {
                     background.setBackgroundColor(Color.WHITE);
         }
 
+        viewHolder.itemView.setTag(task);
+
+//        viewHolder.deleteButton.setOnClickListener(clickListener);
+
+
+
 
 
     }
@@ -69,6 +77,12 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<ListViewHolder> {
     public int getItemCount(){
         return tasks.size();
     }
+
+    public void addTasks(List<Task> tasks){
+        this.tasks = tasks;
+        notifyDataSetChanged();
+    }
+
 
 
 
