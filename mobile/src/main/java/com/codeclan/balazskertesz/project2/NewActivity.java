@@ -66,10 +66,10 @@ public class NewActivity extends AppCompatActivity {
         addTaskButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(taskName.getText() == null || taskPriority.getCheckedRadioButtonId() == -1){
+                if(taskName.getText().length() == 0 || taskPriority.getCheckedRadioButtonId() == -1){
                     Toast.makeText(NewActivity.this,"Missing fields", Toast.LENGTH_SHORT).show();
                 }
-                else{
+                else if(taskName.getText() != null && taskPriority.getCheckedRadioButtonId() != -1){
                     if(taskDescription.getText() == null){taskDescription.setText("");}
                     RadioButton priority = findViewById(taskPriority.getCheckedRadioButtonId());
                     viewModel.addTask(new Task(
@@ -79,6 +79,7 @@ public class NewActivity extends AppCompatActivity {
                     ));
                     finish();
                 }
+
             }
         });
 

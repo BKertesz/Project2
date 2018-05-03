@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="New Task Name"
+            android:hint="@string/new_task_name"
             android:inputType="text"
             tools:layout_editor_absoluteX="70dp"
             tools:layout_editor_absoluteY="25dp" />
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Task description here"
+            android:hint="@string/new_task_description"
             android:inputType="textMultiLine"
             tools:layout_editor_absoluteX="59dp"
             tools:layout_editor_absoluteY="186dp" />
