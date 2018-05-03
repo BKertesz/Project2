@@ -20,7 +20,10 @@
         </activity>
         <activity
             android:name=".NewActivity"
-            android:label="@string/title_activity_new"></activity>
+            android:label="@string/title_activity_new"
+            android:windowSoftInputMode="stateVisible">
+
+        </activity>
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />

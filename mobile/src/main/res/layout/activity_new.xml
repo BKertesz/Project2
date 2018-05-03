@@ -10,19 +10,20 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="368dp"
-        android:layout_height="377dp"
+        android:layout_height="375dp"
+        android:layout_marginBottom="70dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAddNewId"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114">
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/taskName"
@@ -71,28 +72,28 @@
         <RadioGroup
             android:id="@+id/newTaskProrityId"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <RadioButton
-                android:id="@+id/radioButtonGreen"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Green" />
-
-            <RadioButton
-                android:id="@+id/radioButtonYellow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Yellow" />
+            android:layout_height="140dp">
 
             <RadioButton
                 android:id="@+id/radioButtonRed"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="5dp"
                 android:layout_weight="1"
                 android:text="Red" />
+
+            <RadioButton
+                android:id="@+id/radioButtonYellow"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_weight="1"
+                android:text="Yellow" />
+
+            <RadioButton
+                android:id="@+id/radioButtonGreen"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_weight="1"
+                android:text="Green" />
 
         </RadioGroup>
 
@@ -102,19 +103,19 @@
         android:id="@+id/buttonAddNewId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Add Task"
-        app:layout_constraintBottom_toBottomOf="@+id/navigation"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.805"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888" />
+        app:layout_constraintVertical_bias="0.53" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
