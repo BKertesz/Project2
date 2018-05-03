@@ -12,6 +12,11 @@ import java.util.List;
 @Dao
 public interface TaskDao {
 
+    //All database queries and methods are written here
+    //This is actually just an interface,but it works in a way you don't actually
+    //have to implements methods in it, but you can just call them
+    //Because who really needs polymorpism
+
     @Query("SELECT * FROM tasks")
     LiveData<List<Task>> getAll();
 

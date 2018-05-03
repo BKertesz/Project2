@@ -8,9 +8,10 @@ import android.support.annotation.NonNull;
 
 @Entity(tableName = "tasks")
 public class Task {
-//    This class is the highest level object, used for data storage by other classes
+    //This class creates tasks objects also contain information on how to save it to the database
 
     @PrimaryKey(autoGenerate = true)
+    //This one is really important other wise the database can't manipulate or recall objects
     private int taskId;
 
     @ColumnInfo(name = "name")

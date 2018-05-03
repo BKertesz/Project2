@@ -21,15 +21,8 @@
         <activity
             android:name=".NewActivity"
             android:label="@string/title_activity_new"
-            android:windowSoftInputMode="stateVisible">
-
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity
-            android:name=".DetailsActivity"
-            android:label="@string/title_activity_details"></activity>
+            android:windowSoftInputMode="stateVisible"></activity>
+        <!-- This service is only used on devices with API v17+ -->
     </application>
 
 </manifest>

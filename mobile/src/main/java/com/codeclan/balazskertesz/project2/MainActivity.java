@@ -18,17 +18,18 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
+    //Reference for everything used by main activity
     List<Task> tasks;
     private RecyclerView recyclerView;
-    private MyRecyclerAdapter adapter;
     public TaskListViewModel viewModel;
     public BottomNavigationView navigation;
 
 
 
 
+    //This is the built in navigation bar listener for the bottom
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -40,9 +41,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     return true;
                 case R.id.navigation_new:
+                    //Here it starts the activity for adding new task
                     createNewTask();
                     return true;
                 case R.id.navigation_settings:
+                    //This actually creates an intent outside the app for the settings
+                    //Built into android
                     startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
                     return true;
             }
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        //Sets up what is seleted on the start of the app
         navigation.setSelectedItemId(R.id.navigation_home);
 
         //Find the recycleView on the main page
@@ -64,13 +69,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         //Creates a new adapter instance and passes in the tasks
-        final MyRecyclerAdapter adapter = new MyRecyclerAdapter(tasks,this);
+        //Note that task is actually empty and not used anywhere else
+        //This is a bug that the adapter can't be initialized without something in it
+        final MyRecyclerAdapter adapter = new MyRecyclerAdapter(tasks);
+
+        //This bit selects how I want to display the rows on the activity
+        //The three selection is Linear, Grid, Staggered Grid layout
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //Activates the recycleviewer with the adapter
+
+
+        //Activates the RecyclerView with the adapter
         recyclerView.setAdapter(adapter);
 
+        //The viewModel is used to give a live access to the database
         viewModel = ViewModelProviders.of(this).get(TaskListViewModel.class);
 
+        //Here the viewModel updates the adapter's task list contionusly
         viewModel.getTaskList().observe(MainActivity.this, new Observer<List<Task>>() {
             @Override
             public void onChanged(@Nullable List<Task> tasks) {
@@ -86,18 +100,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void createNewTask(){
+        //This is used by the bottomnavigation bar to go to the newTask activity
         Intent getNewTask = new Intent(this,NewActivity.class);
         startActivity(getNewTask);
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
+        //Every time we return to the activity make sure the Home button is highlighted
+        //On the bottomNavigationBar
         navigation.setSelectedItemId(R.id.navigation_home);
     }
 
-    @Override
-    public void onClick(View v) {
 
-    }
 }

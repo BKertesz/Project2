@@ -8,6 +8,9 @@ import java.util.List;
 
 public class TaskListViewModel extends AndroidViewModel {
 
+    //The main activity used this view model to refresh its data from the database
+    //Also to manipulate any query or database object
+
     private final LiveData<List<Task>> taskList;
 
     private AppDatabase appDatabase;
