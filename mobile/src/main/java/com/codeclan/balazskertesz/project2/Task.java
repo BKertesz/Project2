@@ -29,7 +29,7 @@ public class Task {
         this.name = name;
         this.description = description;
         this.priority = priority;
-        this.status = true;
+        this.status = false;
     }
 
     public int getTaskId() {

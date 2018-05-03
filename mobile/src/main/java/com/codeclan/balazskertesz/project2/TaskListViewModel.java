@@ -31,6 +31,10 @@ public class TaskListViewModel extends AndroidViewModel {
         appDatabase.taskDao().deleteTask(task);
     }
 
+    public void updateTask(Task task) {
+        appDatabase.taskDao().updateTask(task);
+    }
+
 
 
 

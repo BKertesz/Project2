@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +25,8 @@ public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public ImageButton editButton;
     public ImageButton deleteButton;
 
+    public CheckBox checkBox;
+
 
 
     public ListViewHolder(Context context,View itemView){
@@ -35,11 +38,13 @@ public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         background = (LinearLayout) itemView.findViewById(R.id.itemBackgroundId);
         editButton = (ImageButton) itemView.findViewById(R.id.editButtonId);
         deleteButton = (ImageButton) itemView.findViewById(R.id.deleteButtonId);
+        checkBox = (CheckBox) itemView.findViewById(R.id.checkBoxId);
 
 
 //        itemView.setOnClickListener(this);
         editButton.setOnClickListener(this);
         deleteButton.setOnClickListener(this);
+        checkBox.setOnClickListener(this);
 
 
 
@@ -57,6 +62,19 @@ public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnCl
             MainActivity mainActivity = (MainActivity) context;
             Task task = mainActivity.viewModel.getTaskList().getValue().get(position);
             mainActivity.viewModel.deleteItem(task);
+        }
+        else if(view.getId() == checkBox.getId()){
+            MainActivity mainActivity = (MainActivity) context;
+            Task task = mainActivity.viewModel.getTaskList().getValue().get(position);
+            if(task.isStatus()){
+                task.setStatus(false);
+                mainActivity.viewModel.updateTask(task);
+            }
+            else{
+                task.setStatus(true);
+                mainActivity.viewModel.updateTask(task);
+            }
+
         }
 
 //        if(position != RecyclerView.NO_POSITION){

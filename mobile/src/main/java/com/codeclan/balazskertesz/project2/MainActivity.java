@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView recyclerView;
     private MyRecyclerAdapter adapter;
     public TaskListViewModel viewModel;
+    public BottomNavigationView navigation;
 
 
 
@@ -53,9 +54,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
+        navigation.setSelectedItemId(R.id.navigation_home);
 
         //Find the recycleView on the main page
         recyclerView = (RecyclerView) findViewById(R.id.recyclerViewId);
@@ -89,16 +90,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View view){
-//        Task task = (Task) view.getTag();
-//        viewModel.deleteItem(task);
-
-
+    protected void onResume() {
+        super.onResume();
+        navigation.setSelectedItemId(R.id.navigation_home);
     }
 
+    @Override
+    public void onClick(View v) {
 
-
-
-
-
+    }
 }
