@@ -2,6 +2,7 @@ package com.codeclan.balazskertesz.project2;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,10 +67,20 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<ListViewHolder> {
         viewHolder.itemView.setTag(task);
 
         viewHolder.checkBox.setChecked(task.isStatus());
+        if(task.isStatus()){
+            viewHolder.nameText.setPaintFlags(viewHolder.nameText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            viewHolder.descriptionText.setPaintFlags(viewHolder.nameText.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        }
+        if(!task.isStatus()){
+            viewHolder.nameText.setPaintFlags(viewHolder.nameText.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+            viewHolder.descriptionText.setPaintFlags(viewHolder.descriptionText.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+        }
 
 
 
-//        viewHolder.deleteButton.setOnClickListener(clickListener);
+
+
+
 
 
 

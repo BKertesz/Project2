@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     createNewTask();
                     return true;
                 case R.id.navigation_settings:
+                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
                     return true;
             }
             return false;

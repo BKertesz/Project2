@@ -41,6 +41,7 @@ public class NewActivity extends AppCompatActivity {
 
                     return true;
                 case R.id.navigation_settings:
+                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
                     return true;
             }
             return false;
@@ -65,10 +66,11 @@ public class NewActivity extends AppCompatActivity {
         addTaskButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                if(taskName.getText() == null || taskDescription.getText() == null || taskPriority.getCheckedRadioButtonId() == -1){
+                if(taskName.getText() == null || taskPriority.getCheckedRadioButtonId() == -1){
                     Toast.makeText(NewActivity.this,"Missing fields", Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    if(taskDescription.getText() == null){taskDescription.setText("");}
                     RadioButton priority = findViewById(taskPriority.getCheckedRadioButtonId());
                     viewModel.addTask(new Task(
                             taskName.getText().toString(),
