@@ -10,8 +10,8 @@ You are required to write an Android app which will allow the user to maintain a
 
 <h4>Project Extensions</h4>
 
-Allow the user to prioritise and/or categorise tasks
-Use the calendar to set due dates on tasks.
+<p>Allow the user to prioritise and/or categorise tasks</p>
+<p>Use the calendar to set due dates on tasks.</p>
 <h3>Features</h3>
 <ul>
   <li>Using Room Database</li>
